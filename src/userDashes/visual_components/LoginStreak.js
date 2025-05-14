@@ -27,6 +27,6 @@ export default function LoginStreak(){
     if( loading ) return <div>Streak Loading...</div>
     const loginStreakChartData = streakData.map((value,index)=>({x:`Day${index+1}`,y:value}));
     return(<div style={{width:'100%', height:'100%', display: "flex"}}>
-
+        
     </div>);
 }

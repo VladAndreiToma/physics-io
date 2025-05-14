@@ -33,7 +33,7 @@ export default function BottomZone(){
                     </a>
 
                     </div>
-                    <label style={{color: "whitesmoke", fontSize: "16px" , marginTop: "0px"}}>
+                    <label style={{color: "whitesmoke", fontSize: "calc(0.5*(1.7vw + 1.7vh))" , marginTop: "0px"}}>
                         All rigths reserved to |physics-io{`>`}.<br/>
                         Every material inside is copyrighted.<br/>
                         Any attempt of using this material fraudulously will be punished .
@@ -41,42 +41,42 @@ export default function BottomZone(){
                     </label>
                 </div>
                 <div className="feedback-zone">
-                    <label style={{ fontSize: "120%" , fontFamily: "Orbitron" , fontWeight: "bold" , color: "whitesmoke" }}>Send a feedback or ask a question</label>
+                    <label style={{ fontSize: 'calc(0.5*(2vw + 2vh))' , fontFamily: "Orbitron" , fontWeight: "bold" , color: "whitesmoke" }}>Send a feedback or ask a question</label>
                     <textarea placeholder="write something. Support team will reach for you" className="feedback-input"></textarea>
                 </div>
                 <div className="reaching">
                     <a href="mailto:contact@physics.io" className="contact-ref-hook">
-                        <div style={{display: "flex", justifyContent:"flex-start", flexDirection: "row" , gap: "2%" , margin: 0}}>
-                            <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" style={{ backgroundColor:"#DDD" , width: "40px" , height: "40px" , borderRadius:'8px' }} alt="Email"></img>
+                        <div className="contact-method-div">
+                            <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" className="reach-picture" alt="Email"></img>
                             <label style={{ textDecoration: "none" , color:"inherit"}}>contact@physics-io.com</label>
                         </div>
                     </a>
 
                     <a href="tel:+12345678099999111111" className="contact-ref-hook">
-                        <div style={{display: "flex", flexDirection: "row" , gap: "2%" , justifyContent: "flex-start" , margin: 0}}>
-                            <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Phone Icon" style={{ width: "40px",  height: "40px"}}></img>
+                        <div className="contact-method-div">
+                            <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Phone Icon" className="reach-picture"></img>
                             <label>+12345678909999911111</label>
                         </div>
                     </a>
 
                     <a href="mailto:contact@physics.io" className="contact-ref-hook">
-                        <div style={{display: "flex", flexDirection: "row" , gap: "2%" , justifyContent: "flex-start" , margin: 0}}>
-                            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="User Icon" style={{width:"40px", borderRadius:"20px", height:"40px"}}></img>
+                        <div className="contact-method-div">
+                            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="User Icon" className="reach-picture"></img>
                             <label>tutor1@physics-io.com</label>
                         </div>
                     </a>
 
                     <a href="mailto:contact@physics.io" className="contact-ref-hook">
-                        <div style={{display: "flex", flexDirection: "row" , gap: "2%" , justifyContent: "flex-start" , margin: 0}}>
-                            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="User Icon" style={{width:"40px", borderRadius:"20px", height:"40px"}}></img>
+                        <div className="contact-method-div">
+                            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="User Icon" className="reach-picture"></img>
                             <label>tutor2@physics-io.com</label>
                         </div>
                     </a>
 
                     <a href="mailto:contact@physics.io" className="contact-ref-hook">
-                        <div style={{display: "flex", flexDirection: "row" , gap: "2%" , justifyContent: "flex-start" , margin: 0}}>
-                            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="User Icon" style={{width:"40px", borderRadius:"20px", height:"40px"}}></img>
-                            <label>tutor3@physics-io.com</label>
+                        <div className="contact-method-div">
+                            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="User Icon" className="reach-picture"></img>
+                            <p>tutor3@physics-io.com</p>
                         </div>
                     </a>
                 </div>
@@ -84,7 +84,7 @@ export default function BottomZone(){
             <div className="horizontal-service-footer">
             {
                 options.map( ( option , index ) =>(
-                    <label key={index}> {option}{index < options.length-1 ?  "\u00A0\u00A0|\u00A0\u00A0": ''}</label>
+                    <label style={{ cursor:"pointer" }} key={index}> {option}{index < options.length-1 ?  "\u00A0\u00A0|\u00A0\u00A0": ''}</label>
                 ) )
             }
             </div>
