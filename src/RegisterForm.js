@@ -42,48 +42,53 @@ const RegisterForm = () => {
 
   return (
     <div className="register-page">
-      <div className="register-container">
-        <h2>Register</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="username" className="label-register">Username</label>
-            <input
-              type="text"
-              id="username"
-              className="input-username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="email" className="label-register">Email</label>
-            <input
-              type="text"
-              id="email"
-              className="input-email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password" className="label-register">Password</label>
-            <input
-              type="password"
-              id="password"
-              className="input-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <button type="submit" className="button-register">Register</button>
-          {error && <div className="error">{error}</div>}
-        </form>
-        <div className="register-link">
-          <p>Already have an account? <Link to="/login" style={{ fontWeight: 'bold' , color: 'whitesmoke' , textDecoration: 'none' }}>Login</Link></p>
-        </div>
+      <div className='register-left-side'>
+
+      </div>
+      <div className='register-right-side'>
+            <div className="register-container">
+              <h2>Register</h2>
+              <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                  <label htmlFor="username" className="label-register">Username</label>
+                  <input
+                    type="text"
+                    id="username"
+                    className="input-username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="email" className="label-register">Email</label>
+                  <input
+                    type="text"
+                    id="email"
+                    className="input-email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="password" className="label-register">Password</label>
+                  <input
+                    type="password"
+                    id="password"
+                    className="input-password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                </div>
+                <button type="submit" className="button-register">Register</button>
+                {error && <div className="error">{error}</div>}
+              </form>
+              <div className="register-link">
+                <p>Already have an account? <Link to="/login" style={{ fontWeight: 'bold' , color: 'whitesmoke' }}>Login</Link></p>
+              </div>
+            </div>
       </div>
     </div>
   );

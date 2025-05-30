@@ -1,17 +1,22 @@
-import ChatBotBox from "../ChatBotBox";
 import TopBar from "../TopBar";
 import CreateCoursePage from "./CreateCoursePage";
 import CreateGoToProblems from "./CreateGoToProblems";
 import { useLocation } from "react-router-dom";
 import useTrackCourseVisit from "./visitCourseApi";
-
+import PageOfChatBox from "../PageOfChatBox";
+import AskNewtonium from "../AskNewtonium";
+import { useState } from "react";
+import { useNewtoniumClose } from "./useNewtoniumClose";
 
 export default function SolidStateAndSemiconductors(){
     
     //calling the custom hook for trackign courses
     useTrackCourseVisit();
 
-    const solidStateContent = [
+    const[talkToNewtonium, setTalkToNewtonium] = useState(false);
+    useNewtoniumClose(()=>setTalkToNewtonium(false));
+
+    const content = [
         {
           title: `
 # Crystal Lattices and Unit Cells`,
@@ -172,9 +177,14 @@ It builds foundational knowledge for electronics, materials science, and device 
         <div className="course-page">
             <TopBar/>
             <div className="content-for-course">
-                <CreateCoursePage hereProps={ solidStateContent }/>
-                <CreateGoToProblems where_id={topic}/>
-                <ChatBotBox/>
+            {!talkToNewtonium ? 
+            (<>
+                <CreateCoursePage hereProps={content} />
+                <CreateGoToProblems where_id={topic} />
+                <AskNewtonium onClick={() => setTalkToNewtonium(prev => !prev)} />
+              </>) : 
+              (<PageOfChatBox />)
+            }
             </div>
         </div>
     );

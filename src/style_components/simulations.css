@@ -1,0 +1,96 @@
+.simulations-academia-holder{
+    box-sizing: border-box;
+    width: 100vw; height: 100vh; position:absolute; top: 0vh;  left: 0vw;
+    display: flex;
+}
+.simulations-library{
+    box-sizing: border-box;
+    display: flex;  flex-direction: column; justify-content: flex-start; align-items: center;
+    width: 100vw; min-height:calc(100vh - 5rem);
+    height: auto;
+    gap: 2vh;
+    position: absolute; top: 6rem; left: 0vw;
+    background-color: inherit;
+    font-size: calc((1/2)*(2.3vw + 2.3vh));
+    font-family: 'Orbitron';
+    box-sizing: border-box;
+    padding-left: 1vw;
+    padding-right: 1vw;
+}
+
+
+
+.simulation-cell{
+  flex: 0 0 auto;
+  color: whitesmoke;
+  width: 35vw; 
+  height: 100%;
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  background-color: #1c1c1c; 
+  border-radius: 1.2rem;
+  box-sizing: border-box;
+  padding: 0.1rem;
+  overflow: hidden;
+  text-align: center;
+  white-space: normal;
+  flex-direction: column;
+  gap: 3vw;
+}
+.simulations-slider{
+  background-color: inherit;
+  width: 100vw; font-family: 'Orbitron';
+  height: 32vh;
+  gap: 3vw;
+  font-size: calc(0.5*( 2.3vw + 2.3vh ));
+  display: flex;  flex-direction: row; justify-content: flex-start; align-items: center;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+.fade-separator-line{
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    border-style: solid;
+    opacity: 0.6;
+    border-width: 0 0 1vh 0; /* sus, dreapta, jos, stânga */
+    border-image: linear-gradient(to right, transparent 0%, #b22222 4% , #b22222 95%, transparent 99%) 1;
+}
+
+
+
+
+@keyframes giggle {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(1deg); }
+  50% { transform: rotate(-1deg); }
+  75% { transform: rotate(1deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.keyword-box {
+  background-color: #222;
+  border-radius: 4rem;
+  padding: 1rem;
+  color: tomato;
+  text-align: center;
+  font-weight: bold;
+  user-select: none;
+  font-size: 1rem;
+  width: 17vw;
+  border: solid 2px #b22222;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+  font-size: calc(0.5 * (1.3vh + 1.3vw));
+}
+
+.keyword-box:hover {
+  background-color: #b22222;
+  color: white;
+  box-shadow: 0 0 10px #b22222aa;
+  animation: giggle 1.5s infinite;
+}

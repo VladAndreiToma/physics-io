@@ -1,17 +1,22 @@
-import Markdown from "react-markdown";
 import TopBar from "../TopBar";
 import CreateCoursePage from "./CreateCoursePage";
 import { useLocation } from "react-router-dom";
 import CreateGoToProblems from "./CreateGoToProblems";
-import ChatBotBox from "../ChatBotBox";
+import PageOfChatBox from "../PageOfChatBox";
+import AskNewtonium from "../AskNewtonium";
 import useTrackCourseVisit from "./visitCourseApi";
+import { useState } from "react";
+import { useNewtoniumClose } from "./useNewtoniumClose";
 
 export default function VectorCalculus(){
 
       //custom hook for courses tracking calling here
       useTrackCourseVisit();
 
-    const vectorCalculusContent = [
+      const [talkToNewtonium, setTalkToNewtonium] = useState(false);
+      useNewtoniumClose(()=>setTalkToNewtonium(false));
+
+    const content = [
         {
           title: `
 # Gradient`,
@@ -123,9 +128,14 @@ Let \\( \\mathbf{F} = (y, -x, 0) \\). The curl is:
         <div className="course-page">
             <TopBar/>
             <div className="content-for-course">
-                <CreateCoursePage hereProps={ vectorCalculusContent }/>
-                <CreateGoToProblems where_id={ topic }/>
-                <ChatBotBox/>
+            {!talkToNewtonium ? 
+              (<>
+                <CreateCoursePage hereProps={content} />
+                <CreateGoToProblems where_id={topic} />
+                <AskNewtonium onClick={() => setTalkToNewtonium(prev => !prev)} />
+              </>) : 
+              (<PageOfChatBox />)
+            }
             </div>
         </div>
     )

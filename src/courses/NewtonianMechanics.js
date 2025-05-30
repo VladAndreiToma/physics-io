@@ -1,16 +1,23 @@
-import ChatBotBox from "../ChatBotBox";
 import TopBar from "../TopBar";
 import CreateCoursePage from "./CreateCoursePage";
 import CreateGoToProblems from './CreateGoToProblems';
 import { useLocation } from "react-router-dom";
 import useTrackCourseVisit from "./visitCourseApi";
+import { useState } from "react";
+import { useNewtoniumClose } from "./useNewtoniumClose";
+import AskNewtonium from "../AskNewtonium";
+import PageOfChatBox from "../PageOfChatBox";
 
 export default function NewtonianMechanics(){
 
         //calling the custom hook for course tracking
         useTrackCourseVisit();
 
-  const newtonianMechanicsContentArray = [
+        //talk to newtonium
+        const [talkToNewtonium, setTalkToNewtonium] = useState(false);
+        useNewtoniumClose(()=>setTalkToNewtonium(false));
+
+  const content = [
     {
         title: `
 # Kinematics & Dynamics`,
@@ -192,9 +199,14 @@ console.log( "location: " , topic );
                 <div className="course-page">
                         <TopBar />
                 <div className="content-for-course">
-                        <CreateCoursePage hereProps={ newtonianMechanicsContentArray }/>
-                        <CreateGoToProblems  where_id={topic}/>
-                        <ChatBotBox/>
+                {!talkToNewtonium ? 
+                        (<>
+                        <CreateCoursePage hereProps={content} />
+                        <CreateGoToProblems where_id={topic} />
+                        <AskNewtonium onClick={() => setTalkToNewtonium(prev => !prev)} />
+                        </>) : 
+                        (<PageOfChatBox />)
+                }
                 </div>
                 </div>
         );

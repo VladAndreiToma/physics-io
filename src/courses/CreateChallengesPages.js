@@ -3,7 +3,12 @@ import TopBar from "../TopBar";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { AnimatePresence } from "framer-motion";
-import ChatBotBox from "../ChatBotBox";
+import { useProblemsStats } from "./custom_hooks/useProblemsStats";
+import PageOfChatBox from "../PageOfChatBox";
+import AskNewtonium from "../AskNewtonium";
+import { useNewtoniumClose } from "./useNewtoniumClose";
+import InsertBottom from "../userDashes/visual_components/InsertBottom";
+
 // here i m creating the pages with problems and challenges with difficulty filters
 // integrate also an ai chatbot or smth to help with indicatives in solving any issues
 // i ll make use of usaparams to get dynamically the links so i get the entry key for server
@@ -55,53 +60,81 @@ export default function CreateChallengesPage(){
     }));
     };
 
+    const {submitProblem, seeSolution, seeHints, submitSolution} = useProblemsStats();
+
+
+    const[talkToNewtonium, setTalkToNewtonium] = useState(false);
+    useNewtoniumClose(()=>setTalkToNewtonium(false));
+
     return (
         <div className="course-page">
-          <TopBar/>
-          <div className="challenges-page">
-          {problems.length > 0 ? (
-                    problems.map((problem) => {
-                        const isHintOpen = openHints[problem.id] || false;
-                        let stars = getDifficultyStars(problem.difficulty);
-                        return(
-                            <div key={problem.id} className="problem-container">
-                                <div><strong>{problem.subject}</strong></div>
-                                <div className="difficulty-stars" >{'★'.repeat(stars)}{'☆'.repeat(5 - stars)}</div>
-                                <div><strong>Question:</strong> {problem.question}</div>
-                                <div className="problem-actions">
-                                    <button className="generic-action-button-in-problems-section"
-                                        onClick={()=>{ toggleHint(problem.id) }}>
-                                        {openHints[problem.id] ? "Hide Hint" : "See Hint"}
-                                    </button>
-                                    <button className="generic-action-button-in-problems-section">
-                                        See Solution
-                                    </button>
-                                    <button className="generic-action-button-in-problems-section">
-                                        Update Your Solution
-                                    </button>
-                                </div>
-                                <AnimatePresence>
-                                {isHintOpen && (
-                                    <motion.div
-                                        key="hint"
-                                        initial={{ opacity: 0, height: 0 }}
-                                        animate={{ opacity: 1, height: "auto" }}
-                                        exit={{ opacity: 0, height: 0 }}
-                                        transition={{ duration: 0.2 }}
-                                        style={{ marginTop: "5px", paddingLeft: "15px", width: "auto" }}
-                                    >
-                                        <p>{problem.hint || "No hint available."}</p>
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
-                            </div>
-                        )
-                    })
-                ) : (
-                    <p>No problems available for this topic.</p>
-                )}
-                <ChatBotBox />
-          </div>
+        { 
+            !talkToNewtonium ? (
+            <>
+                <TopBar/>
+                <div className="challenges-page">
+                {problems.length > 0 ? (
+                            problems.map((problem) => {
+                                const isHintOpen = openHints[problem.id] || false;
+                                let stars = getDifficultyStars(problem.difficulty);
+                                return(
+                                    <div key={problem.id} className="problem-container">
+                                        <div><strong>{problem.subject}</strong></div>
+                                        <div className="difficulty-stars" >{'★'.repeat(stars)}{'☆'.repeat(5 - stars)}</div>
+                                        <div><strong>Question:</strong> {problem.question}</div>
+                                        <div className="problem-actions">
+                                            <button className="generic-action-button-in-problems-section"
+                                            onClick={() => {
+                                                    toggleHint(problem.id);
+                                                    if (!openHints[problem.id]) {
+                                                    seeHints({ id: problem.id, difficulty: problem.difficulty });
+                                                    }
+                                                }}
+                                            >
+                                                {openHints[problem.id] ? "Hide Hint" : "See Hint"}
+                                            </button>
+                                            <button className="generic-action-button-in-problems-section"
+                                                onClick={()=>seeSolution({id: problem.id, difficulty: problem.difficulty})}>
+                                                See Solution
+                                            </button>
+                                            <button 
+                                                onClick={()=>submitSolution()}
+                                                className="generic-action-button-in-problems-section">
+                                                Update Your Solution
+                                            </button>
+                                            <button className="generic-action-button-in-problems-section"
+                                                onClick={()=>submitProblem({id: problem.id, difficulty: problem.difficulty})}>
+                                                Submit
+                                            </button>
+                                        </div>
+                                        <AnimatePresence>
+                                        {isHintOpen && (
+                                            <motion.div
+                                                key="hint"
+                                                initial={{ opacity: 0, height: 0 }}
+                                                animate={{ opacity: 1, height: "auto" }}
+                                                exit={{ opacity: 0, height: 0 }}
+                                                transition={{ duration: 0.2 }}
+                                                style={{ marginTop: "5px", paddingLeft: "15px", width: "auto" }}
+                                            >
+                                                <p>{problem.hint || "No hint available."}</p>
+                                            </motion.div>
+                                        )}
+                                        </AnimatePresence>
+                                    </div>
+                                )
+                            })
+                        ) : (
+                            <p>No problems available for this topic.</p>
+                        )}
+                <AskNewtonium onClick={() => setTalkToNewtonium(prev => !prev)}/>
+                <InsertBottom/>
+                </div>
+            </>
+            )
+            :
+            (<PageOfChatBox/>)
+        }
         </div>
     );
 }

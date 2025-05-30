@@ -1,19 +1,24 @@
-import ReactMarkdown from 'react-markdown';
 import TopBar from "../TopBar";
 import CreateCoursePage from './CreateCoursePage';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import CreateGoToProblems from './CreateGoToProblems';
-import ChatBotBox from '../ChatBotBox';
 import useTrackCourseVisit from './visitCourseApi';
-
+import { useNewtoniumClose } from "./useNewtoniumClose";
+import AskNewtonium from "../AskNewtonium";
+import PageOfChatBox from "../PageOfChatBox";
+import { useState } from "react";
 
 export default function MathematicalMethodsForPhysicsAndCalculus(){
 
         // calling the custom tracking hook for courses
         useTrackCourseVisit();
+    
+        //talk to newtonium 
+        const[talkToNewtonium, setTalkToNewtonium] = useState(false);
+        useNewtoniumClose(()=>setTalkToNewtonium(false));
         
     // course content
-    const calculusContent = [
+    const content = [
         {
           title: `
 # Derivatives`,
@@ -137,9 +142,14 @@ The convergence of a series determines whether it has a finite sum.
         <div className="course-page" >
             <TopBar/>
             <div className="content-for-course">
-                <CreateCoursePage hereProps={ calculusContent }/>
-                <CreateGoToProblems where_id={ topic }/>
-                <ChatBotBox/>
+            {!talkToNewtonium ? 
+                        (<>
+                          <CreateCoursePage hereProps={content} />
+                          <CreateGoToProblems where_id={topic} />
+                          <AskNewtonium onClick={() => setTalkToNewtonium(prev => !prev)} />
+                        </>) : 
+                        (<PageOfChatBox />)
+            }
             </div>
         </div>
     );

@@ -1,15 +1,22 @@
-import Markdown from "react-markdown";
 import TopBar from "../TopBar";
 import CreateCoursePage from "./CreateCoursePage";
 import { useLocation, useParams } from "react-router-dom";
-import CreateGotoProblems from "./CreateGoToProblems";
-import ChatBotBox from "../ChatBotBox";
+import CreateGoToProblems from "./CreateGoToProblems";
 import useTrackCourseVisit from "./visitCourseApi";
+import { useState } from "react";
+import AskNewtonium from "../AskNewtonium";
+import { useNewtoniumClose } from "./useNewtoniumClose";
+import PageOfChatBox from "../PageOfChatBox";
 
 export default function OscillationsAndWaves(){
     
       //calling the custom hook for course tracking
       useTrackCourseVisit();
+
+      //see if user wants to talk with newtonium
+      const[ talkToNewtonium, setTalkToNewtonium ] = useState(false);
+      console.log(`talk to newtonium ${talkToNewtonium}`);
+      useNewtoniumClose( ()=>setTalkToNewtonium(false) );
 
     const content = [
         {
@@ -133,10 +140,15 @@ Oscillations and waves form the backbone of classical physics and engineering ap
             <div className="course-page">
                   <TopBar/>
                   <div className="content-for-course">
-                        <CreateCoursePage hereProps={ content }/>
-                        <CreateGotoProblems where_id={topic}/>
-                        <ChatBotBox/>
+                        {!talkToNewtonium ? 
+                              (<>
+                                    <CreateCoursePage hereProps={content} />
+                                    <CreateGoToProblems where_id={topic} />
+                                    <AskNewtonium onClick={() => setTalkToNewtonium(prev => !prev)} />
+                              </>) : 
+                              (<PageOfChatBox />)
+                        }
                   </div>
             </div>
-    )
+      )
 }

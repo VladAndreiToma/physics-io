@@ -1,17 +1,24 @@
-import Markdown from "react-markdown";
 import TopBar from "../TopBar";
 import CreateCoursePage from "./CreateCoursePage";
 import CreateGoToProblems from "./CreateGoToProblems";
 import { useLocation } from "react-router-dom";
 import ChatBotBox from "../ChatBotBox";
 import useTrackCourseVisit from "./visitCourseApi";
+import { useState } from "react";
+import { useNewtoniumClose } from "./useNewtoniumClose";
+import PageOfChatBox from "../PageOfChatBox";
+import AskNewtonium from "../AskNewtonium";
 
 export default function QuantumMechanics(){ 
 
     //calling the custom hook to track courses
     useTrackCourseVisit();
 
-  const contentArray = [
+    //talk to newtonium
+    const[talkToNewtonium, setTalkToNewtonium] = useState(false);
+    useNewtoniumClose( ()=>setTalkToNewtonium(false) );
+
+  const content = [
     {
       title: `
 # Origins of Quantum Theory`,
@@ -166,9 +173,14 @@ Applies to transitions caused by external fields, e.g., light absorption/emissio
         <div className="course-page">
             <TopBar/>
             <div className="content-for-course">
-                <CreateCoursePage hereProps={ contentArray }/>
-                <CreateGoToProblems where_id={topic}/>
-                <ChatBotBox/>
+            {!talkToNewtonium ? 
+              (<>
+                <CreateCoursePage hereProps={content} />
+                <CreateGoToProblems where_id={topic} />
+                <AskNewtonium onClick={() => setTalkToNewtonium(prev => !prev)} />
+              </>) : 
+              (<PageOfChatBox />)
+            }
             </div>
         </div>
     );

@@ -1,16 +1,23 @@
-import ChatBotBox from "../ChatBotBox";
 import TopBar from "../TopBar";
 import CreateCoursePage from "./CreateCoursePage";
 import CreateGoToProblems from "./CreateGoToProblems";
 import { useLocation } from "react-router-dom";
 import useTrackCourseVisit from "./visitCourseApi";
+import { useState } from "react";
+import { useNewtoniumClose } from "./useNewtoniumClose";
+import AskNewtonium from "../AskNewtonium";
+import PageOfChatBox from "../PageOfChatBox";
 
 export default function OpticsAndWaves(){
     
     //calling custom made tracking hook for courses
     useTrackCourseVisit();
 
-    const opticsContent = [
+    //talk to newtonium
+    const[talkToNewtonium, setTalkToNewtonium] = useState(false);
+    useNewtoniumClose(()=>setTalkToNewtonium(false));
+
+    const content = [
         {
           title: `
 # Geometric Optics`,
@@ -133,9 +140,14 @@ This course covers a full spectrum of optical physics from classical ray optics 
         <div className="course-page">
             <TopBar/>
             <div className="content-for-course">
-                <CreateCoursePage hereProps={ opticsContent }/>
-                <CreateGoToProblems where_id={ topic }/>
-                <ChatBotBox/>
+            {!talkToNewtonium ? 
+                (<>
+                <CreateCoursePage hereProps={content} />
+                <CreateGoToProblems where_id={topic} />
+                <AskNewtonium onClick={() => setTalkToNewtonium(prev => !prev)} />
+                </>) : 
+                (<PageOfChatBox />)
+            }
             </div>
         </div>
     )

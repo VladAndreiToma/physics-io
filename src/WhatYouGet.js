@@ -1,7 +1,8 @@
 import graduationCap from "./images/graduation-cap-512.png";
 import exerciseBook from "./images/literature-512.png";
 import workStation from "./images/workstation-512.png";
-import microscope from "./images/icons8-microscope-100.png"
+import microscope from "./images/icons8-microscope-100.png";
+
 export default function WhatYouGet(){
     return(
         <div className="what-you-get">
@@ -11,8 +12,7 @@ export default function WhatYouGet(){
                 <div className="provisions-courses">
                     <img src={graduationCap} style={{width:"80px" , height:"80px", color:"whitesmoke"}}></img>
                     <label className="provisions-description">Master key concepts in physics with a comprehensive collection of courses, from basic 
-                        principles to advanced topics. Enhance your knowledge and problem-solving skills with 
-                        expert-led lessons designed for all learners.
+                        principles to advanced topics. Enhance your knowledge and problem-solving skills.
                     </label>
                 </div>
                 <div className="provisions-courses">

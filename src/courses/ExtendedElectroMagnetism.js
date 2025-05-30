@@ -1,15 +1,20 @@
-import Markdown from "react-markdown";
 import TopBar from "../TopBar";
 import CreateCoursePage from "./CreateCoursePage";
 import CreateGoToProblems from "./CreateGoToProblems";
 import { useLocation } from "react-router-dom";
-import ChatBotBox from "../ChatBotBox";
 import useTrackCourseVisit from "./visitCourseApi";
+import AskNewtonium from "../AskNewtonium";
+import PageOfChatBox from "../PageOfChatBox";
+import { useState } from "react";
+import { useNewtoniumClose } from "./useNewtoniumClose";
 
 export default function ExtendedElectroMagnetism(){
 
     //calling custom hook of tracking courses
     useTrackCourseVisit();
+    //talk to newtonium
+    const[talkToNewtonium, setTalkToNewtonium] = useState(false);
+    useNewtoniumClose( () => setTalkToNewtonium(false) );
 
    const contentArray = [
       {
@@ -131,9 +136,14 @@ Maxwell’s equations **unify electromagnetism** and predict **light as an EM wa
       <div className="course-page">
         <TopBar/>
         <div className="content-for-course">
-            <CreateCoursePage hereProps={ contentArray }/>
-            <CreateGoToProblems where_id={ topic }/>
-            <ChatBotBox/>
+        {!talkToNewtonium ? 
+                    (<>
+                      <CreateCoursePage hereProps={contentArray} />
+                      <CreateGoToProblems where_id={topic} />
+                      <AskNewtonium onClick={() => setTalkToNewtonium(prev => !prev)} />
+                    </>) : 
+                    (<PageOfChatBox />)
+          }
         </div>
       </div>
    )

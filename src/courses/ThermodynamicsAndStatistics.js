@@ -1,16 +1,21 @@
-import Markdown from "react-markdown";
 import TopBar from "../TopBar";
 import CreateCoursePage from "./CreateCoursePage";
 import { useLocation } from "react-router-dom";
-import { path } from "framer-motion/client";
 import CreateGoToProblems from "./CreateGoToProblems";
 import ChatBotBox from "../ChatBotBox";
 import useTrackCourseVisit from "./visitCourseApi";
+import { useState } from "react";
+import { useNewtoniumClose } from "./useNewtoniumClose";
+import PageOfChatBox from "../PageOfChatBox";
+import AskNewtonium from "../AskNewtonium";
 
 export default function ThermodynamicsAndStatistics(){
     
     //custom hook for courses tracking calling here
     useTrackCourseVisit();
+
+    const [talkToNewtonium, setTalkToNewtonium] = useState(false);
+    useNewtoniumClose(()=>setTalkToNewtonium(false));
 
     const content = [
         {
@@ -155,9 +160,14 @@ Thermodynamics and Statistical Mechanics describe macroscopic properties of matt
         <div className="course-page">
             <TopBar/>
             <div className="content-for-course">
-                <CreateCoursePage hereProps={ content }/>
-                <CreateGoToProblems where_id={topic}/>
-                <ChatBotBox/>
+            {!talkToNewtonium ? 
+              (<>
+                <CreateCoursePage hereProps={content} />
+                <CreateGoToProblems where_id={topic} />
+                <AskNewtonium onClick={() => setTalkToNewtonium(prev => !prev)} />
+              </>) : 
+              (<PageOfChatBox />)
+            }
             </div>
         </div>
     )

@@ -1,8 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import useClickSplash from "./style_components/useClickSplash";
 
 export default function TopBar(){
-    const services = [ 'BaseHub' , 'Courses' , 'About' , 'FAQ' , 'User' , 'Login' ];
+    // using cool click effect
+    useClickSplash();
+
+    //list of app services
+    const services = [ 'BaseHub' , 'Courses', 'Simulations' , 'About' , 'FAQ' , 'User' , 'Login' ];
+    
     return(
         <div className="top-bar-info">
             <div className="services-bar">

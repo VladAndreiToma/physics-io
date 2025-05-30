@@ -37,11 +37,11 @@ const LoginForm = () => {
         body: JSON.stringify({ email, password }),
       });
 
+      // debugg purpose
       console.log( "THE RESPONSE FOR LOGIN PHASE: ", response );
+
+
       if (response.ok) {
-
-        console.log( response );
-
         const data = await response.json();
         login( data.username , data.id ); 
         setEmail('');
@@ -58,31 +58,36 @@ const LoginForm = () => {
 
   return (
     <div className='login-page'>
-    <div className="login-container">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label className='label-login' htmlFor="email">E-mail</label>
-          <input type="text" className='input-email' name="email" value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
 
-        <div className="form-group">
-          <label className='label-login' htmlFor="password">Password</label>
-          <input type="password" className='input-password' name="password" value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        {error && <p className="error">{error}</p>}
-        <button className='button-login' type="submit">Login</button>
-        <div className="register-link">
-          <p>Don't have an account? <Link to="/registration" style={{ color: 'whitesmoke' , fontWeight: 'bold' }}>Register here</Link></p>
-        </div>
-      </form>
-    </div>
+      <div className='login-left-side'> 
+      </div>
+      <div className='login-right-side'>
+          <div className="login-container">
+            <h2>Login</h2>
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label className='label-login' htmlFor="email">E-mail</label>
+                <input type="text" className='input-email' name="email" value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label className='label-login' htmlFor="password">Password</label>
+                <input type="password" className='input-password' name="password" value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+              {error && <p className="error">{error}</p>}
+              <button className='button-login' type="submit">Login</button>
+              <div className="register-link">
+                <p>Don't have an account? <Link to="/registration" style={{ color: 'whitesmoke' , fontWeight: 'bold' }}>Register here</Link></p>
+              </div>
+            </form>
+          </div>
+      </div>
+
     </div>
   );
 };

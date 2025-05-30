@@ -7,7 +7,7 @@ export default function CollabsableExplanation(
     const [ isOpen , setIsOpen ] = useState(false);
     return(
         <div className="colabsible-element">
-            <div style={{ display: "flex" , flexDirection: "row" }}>
+            <div>
                 <label className="course-name">{title}</label>
                 <span onClick={()=> setIsOpen( !isOpen )} style={{ cursor: "pointer", fontSize:"calc(0.5*( 1.7vw + 1.7vh ))" }}>{ isOpen ? "▲" : "▼" }</span>
             </div>

@@ -1,8 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
+import './style_components/glareDiv.css';
+import './style_components/simulations.css';
 import { BrowserRouter as Router , Routes , Route, Link } from 'react-router-dom';
 import GreetingsPage from './GreetingPage';
-import TopBar from './TopBar';
 import About from './About';
 import FAQs from './FAQ';
 import Courses from './Courses';
@@ -27,8 +27,17 @@ import {UserLoginProvider} from './AppContexts';
 import UserDashboard from './UserDashboard';
 import LoginForm from './LoginForm';
 import RegistrationForm from './RegisterForm';
+import SimultationsDashboard from './SimulationsDashboard';
+import useClickSplash from "./style_components/useClickSplash";
+import './ComplementaryStyles.css';
+import QuantumFieldTheory from './courses/QuantumFieldTheory';
+import StatisticalQuantumMechanics from './courses/StatisticalQuantumMechanics';
+import LasersSystems from './courses/LaserSystems';
+import SemiconductorsAdvanced from './courses/SemiconductorsAdvanced';
 
 function App() {
+
+  useClickSplash();
 
   const courseRoutes = [
     { path: 'mathematical-methods-for-physics-and-calculus', component: MathematicalMethodsForPhysicsAndCalculus },
@@ -44,9 +53,13 @@ function App() {
     { path: 'electrodynamics-and-relativity', component: ElectrodynamicsAndRelativity },
     { path: 'thermodynamics-and-statistics', component: ThermodynamicsAndStatistics },
     { path: 'quantum-mechanics', component: QuantumMechanics },
+    { path: 'quantum-field-theory', component: QuantumFieldTheory },
+    { path: 'statistical-quantum-mechanics', component: StatisticalQuantumMechanics },
     { path: 'relativity' ,  component: Relativity },
     { path: 'optics-and-waves', component: OpticsAndWaves },
+    { path: 'laser-systems', component: LasersSystems},
     { path: 'solid-state-and-semiconductors', component: SolidStateAndSemiconductors },
+    { path: 'semiconductors-advanced' , component: SemiconductorsAdvanced }
   ];
 
   return (
@@ -57,6 +70,7 @@ function App() {
           <Route path='/about' element={<About/>}/>
           <Route path='/faq' element={<FAQs/>}/>
           <Route path='/courses' element={<Courses/>}/>
+          <Route path='/simulations/*' element={<SimultationsDashboard/>}/>
           <Route path='/user' element={<UserDashboard/>}/>
           <Route path='/login' element={<LoginForm/>}/>
           <Route path='/registration' element={<RegistrationForm/>} />

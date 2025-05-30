@@ -47,8 +47,7 @@ export default function GeneralPhysiscsElement(){
                 </div>
                 <div className="join-today-right">
                     <label style={{ fontWeight: "bold"}}>Try out Physics-io today</label>
-                    <button style={{ border: "#000 solid 2px" , width:"25vw" , height: "8vh" , fontFamily:"Orbitron",
-                          backgroundColor: "whitesmoke", color:"black", cursor: "pointer" , fontSize: 'calc(0.5*(2.1vw + 2.1vh))' }} onClick={handleJoinNow}>Join Now</button>
+                    <button className="join-now" onClick={handleJoinNow}>Join Now</button>
                 </div>
             </div>
         </>

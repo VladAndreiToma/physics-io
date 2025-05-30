@@ -1,19 +1,25 @@
-import Markdown from "react-markdown";
 import TopBar from "../TopBar";
 import CreateCoursePage from "./CreateCoursePage";
-import { Link } from "react-router-dom";
 import CreateGoToProblems from "./CreateGoToProblems";
 import { useLocation } from "react-router-dom";
-import ChatBotBox from "../ChatBotBox";
 import useTrackCourseVisit from "./visitCourseApi";
+import AskNewtonium from "../AskNewtonium";
+import PageOfChatBox from "../PageOfChatBox";
+import { useState } from "react";
+import { useNewtoniumClose } from "./useNewtoniumClose";
+
 
 export default function LinearAlgebra(){
 
       //calling the custom hook for tracking courses
       useTrackCourseVisit();
+      
+      //talk to newtonium
+      const[talkToNewtonium, setTalkToNewtonium] = useState(false);
+      useNewtoniumClose(()=>setTalkToNewtonium(false));
 
     // theoretical content
-    const linearAlgebraCourseContent = [
+    const content = [
         {
           title: `
 # Vectors`,
@@ -154,9 +160,14 @@ export default function LinearAlgebra(){
         <div className="course-page" >
                     <TopBar/>
                     <div className="content-for-course">
-                        <CreateCoursePage hereProps={ linearAlgebraCourseContent }/>
-                        <CreateGoToProblems  where_id={topic}/>
-                        <ChatBotBox/>
+                    {!talkToNewtonium ? 
+                        (<>
+                        <CreateCoursePage hereProps={content} />
+                        <CreateGoToProblems where_id={topic} />
+                        <AskNewtonium onClick={() => setTalkToNewtonium(prev => !prev)} />
+                        </>) : 
+                        (<PageOfChatBox />)
+                    }
                     </div>
         </div>
       )
