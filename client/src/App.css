@@ -1,0 +1,1027 @@
+/*importing links from urls to facilitate styling process*/
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Poppins:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+/*styling browser params*/
+/* Works in Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(200, 0, 0, 0.4); /* discreet red */
+  border-radius: 10px;
+  transition: background-color 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(200, 0, 0, 0.7);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(200, 0, 0, 0.4) transparent;
+}
+
+.physics-io-main-page{
+  width: 100%;
+  min-height: 210vh;
+  height: auto; /* Ensures at least full screen height */
+  background-color: #222;
+  display: flex;
+  color: white;
+  font-family: 'Orbitron';
+  font-size: calc(0.5*(1.8vw + 1.8vh));
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.flow-main-page{
+  position: absolute;
+  top: 80px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 1400px;
+  height: auto;
+  background-color: inherit;
+  row-gap: 0px;
+}
+
+.about{
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #222;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+.faqs{
+  overflow-y: auto;
+  min-height: calc(100vh - 6rem); /* Ensures it does not go under the top bar */
+  position: absolute;
+  top: 6rem; /* Moves the section below the fixed top bar */
+  left: 0rem;
+  background-color: #222;
+  width: 100%;
+  gap: 2vh;
+  color: whitesmoke;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5%;
+  font-size: calc(0.5*(2vw + 2vh));
+  font-family: 'Orbitron';
+  justify-content: flex-start;
+}
+
+.top-bar-info{
+  width: 100%;
+  height: 80px;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  background:
+    linear-gradient( 40deg , #222 65% , #B22222 85% , #222 99% );
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2vw;
+  box-sizing: border-box;
+  z-index: 1;
+  color: whitesmoke;
+  font-family: 'Orbitron';
+  box-shadow: 5px 10px 30px rgba(0, 0, 0, 0.5);
+}
+.services-bar{
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2vw;
+
+}
+
+.service-link {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: calc( 0.5*( 2vw + 2vh ) ); 
+  transition: color 0.3s ease-in-out;
+  transition: background-color 0.3 ease-out;
+}
+
+.service-link:hover {
+  color: #B22222;
+  background-color: #777;
+}
+
+.app-name{
+  font-size: calc( 0.5 *( 2vh + 2vw ));
+  font-weight: bold;
+  font-family: 'Orbitron';
+}
+
+.general-physics {
+  background-image: 
+  linear-gradient( to top , #222 0% , rgba(0,0,0,0) 20%),
+  linear-gradient( to bottom , #222 0% , rgba(0,0,0,0) 20%);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 570px;
+  transition: background-color 0.4s ease;
+}
+
+.general-physics::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0); /* Transparent initially */
+  transition: background-color 0.3s ease;
+  z-index: 1;
+}
+
+.general-physics:hover::before {
+  background-color: rgba(0, 0, 0, 0.85); /* Darken to almost black */
+  background-image: 
+    linear-gradient( to top , #222 0% , rgba(0,0,0,0) 20%),
+    linear-gradient( to bottom , #222 0% , rgba(0,0,0,0) 20%);
+  cursor: pointer;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding: 10%;
+  text-align: justify;
+  align-items: center;
+  box-sizing: border-box;
+  font-size: calc(0.5*(3vw + 3vh));
+  font-weight: bold;
+  content: 'Dive into the extraordinary world of physics, where complex theories are broken down with crystal-clear explanations, and thought-provoking problems push your logic and mathematical skills to new heights. Whether you\'re a curious learner or a passionate problem solver, embark on a journey that transforms the way you see the universe!';
+}
+
+.popular-courses{
+  position: absolute;
+  top: 800px;
+  background-color: transparent;
+  left: 0px;
+  width: 100%;
+  height: 250px; justify-content: flex-start;
+  display: flex; flex-direction: row; gap: 20px;
+  box-sizing: border-box;
+  padding: 10px;
+}
+.popular-course{
+  width: 100%;
+  height: 100%;
+  display: flex; 
+  background-color: transparent;
+  box-shadow: 5px 10px 30px rgba(0, 0, 0, 0.3);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.courses{
+  width: 100%;
+  min-height: 100vh;
+  background-color: #222;
+  background-size: cover;
+  max-height: auto;
+  position: absolute; top: 0px; left: 0px;
+}
+
+.colabsible-element{
+  padding: 15px;
+  width: 100%;
+  min-height: 40px;
+  height: auto;
+  box-sizing: border-box;
+  background-color: #191919;
+  margin-bottom: 10px;
+  box-shadow: 6px 6px 6px 3px #444;
+}
+.faq-name{
+  font-weight: bold;
+  font-size: calc(0.5*(1.8vw + 1.8vh));
+  text-shadow: 0 0 5px #b22222aa, 0 0 10px #b22222aa, 0 0 20px #b22222cc, 0 0 40px #b22222cc, 0 0 80px #b22222cc;
+}
+.course-name{
+  font-weight: bold;
+  font-size: calc(0.5*(1.8vw + 1.8vh));
+}
+
+.courses-content{
+  background-color: #222;
+  position: absolute;
+  top: 6.5rem; left: 0px;
+  width: 100%;
+  padding: 1.5%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  row-gap: 20px;
+  min-height: calc(100vh - 100px);
+  height: auto;
+  color: whitesmoke; font-size: 20px; font-family: 'Orbitron';
+}
+
+.which-course{
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.7 ease-in-out;
+}
+.which-course:hover{
+  color: #B22222;
+}
+
+.course-page{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.course-item{
+    width: 100%;
+    padding: 1.3rem;
+    box-sizing: border-box;
+    background-color: #191919;
+    border-radius: 1rem;
+    display: flex;
+    box-sizing: border-box;
+    padding: 2.5rem;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: justify;
+    text-align: "left";
+    width: 100%;
+    height: 'auto';
+    font-size: calc(0.5*(1.8vh + 1.8vw));
+}
+
+.notes {
+  width: 100%;
+  min-height: 100%;
+  box-sizing: border-box;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 2.2vh;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+
+.content-for-course, .challenges-page{
+  color: whitesmoke;
+  font-style: inherit;
+  box-sizing: border-box;
+  padding: 1rem;
+  position: absolute;
+  top: 12vh;
+  left: 0px;
+  min-height: calc(100% - 12vh);
+  width: 100%;
+  gap: 2.3vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.challenges-page{
+  gap: 15px;
+  top: 100px;
+  box-sizing: border-box;
+  padding: 1%;
+}
+
+.go-premium{
+  color: whitesmoke;
+  border-radius: 10px;
+  box-shadow: 5px 10px 30px rgba(0, 0, 0, 0.5);
+  color: #333;
+  border: none;
+  font-style: "Orbitron";
+  font-weight: bold;
+  font-size: 30px;
+  width: 300px;
+  height: 50px;
+  margin-top: 50px;
+  margin-bottom: 100px;
+}
+
+.problem-container{
+    width: 100%;
+    height: auto;
+    background-color: #111;
+    display: flex;
+    border-radius: 1rem;
+    flex-direction: column;
+    font-weight: semibold; /* 'semibold' is often mapped to 600 */
+    box-sizing: border-box;
+    padding: 2%;
+    color: white;
+    font-size: 20px;
+}
+
+.difficulty-stars{
+  color: gold;
+  background-color: #222;
+  border-radius: 5px;
+  height: auto;
+  max-width: 105px;
+  height: justify;
+  font-size: 25px;
+  padding: none;
+  box-sizing: border-box;
+  display: flex;
+}
+
+
+.to-problems-container{
+  width: 100%;
+  height: auto;
+  background-color: inherit;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #191919;
+  gap: 2rem;
+  padding: 1rem;
+  border-radius: 3rem;
+}
+
+
+.problem-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+}
+
+.problem-actions button {
+  background-color: #222;
+  border-radius: 10px;
+  font-size: 14px;
+  color: whitesmoke;
+  padding: 10px;
+  min-width: 120px;
+  max-width: auto;
+  font-weight: bolder;
+  cursor: pointer;
+  box-sizing: border-box;
+  text-align: center;
+  gap: 5px;
+}
+
+.problem-actions button:hover {
+  background-color: #333;
+}
+
+.problem-actions button span {
+  font-size: 16px;
+}
+
+
+
+/*bottom zone ---------------------------------------------- */
+.bottom-zone{
+  margin-top: 100px;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 60vh;
+  box-shadow: 0 -6px 10px rgba(0, 0, 0, 0.9);
+  row-gap: 6rem;
+  box-sizing: border-box;
+  padding: 3%;
+}
+.contact-follows-support{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  gap: 2%;
+}
+.socials, .feedback-zone, .reaching{
+  display: flex;
+  height: 100%;
+  justify-content:flex-start;
+  flex-direction: column;
+  align-items: center;
+  font-size: calc(0.5*(1.5vw + 1.5vh));
+}
+.socials{
+  width: 30%;
+  gap: 8vh;
+}
+.feedback-zone{
+  width: 45%;
+  gap: 3vh;
+}
+.reaching{
+  width: 25%;
+  gap: 1vh;
+}
+.contact-area{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  gap: 1.8vw;
+}
+.contact-icon{
+  width: calc(0.5*(5vw + 5vh));
+  height: calc(0.5*(5vw + 5vh));
+  background-color: transparent;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.feedback-input {
+  width: 90%;
+  height: 40vh;
+  background-color: #000;
+  color: whitesmoke;
+  font-size: calc(0.5*(1.6vw + 1.6vh));
+  font-weight: bold;
+  border: 0.1rem inset #222;
+  background-color: #555;
+  padding: 2%; /* or 'none' if you don't want resizing */
+  outline: none; /* removes focus highlight */
+}
+.feedback-input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.horizontal-service-footer{
+  width: 100vw;
+  font-size: calc(0.5*(1.4vw + 1.4vh));
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.contact-ref-hook{
+  text-decoration-line: none;
+  color: inherit;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: calc(0.5*(1.5vw + 1.5vh));
+}
+.contact-ref-hook:active{
+  color: #B22222;
+}
+.reach-picture{
+  background-color: #ddd;
+  border-radius: 10px;
+  width: calc(0.5*(3vw + 3vh));
+  height: calc(0.5*(3vw + 3vh));
+  padding: 0.2rem;
+}
+
+.contact-method-div{
+  width: 100%;
+  padding: 1rem;
+  gap: 0.3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/*what you get-------------------------------------------------------------------*/
+.what-you-get{
+  background-color: #111;
+  background-image: 
+    linear-gradient( to top , #222 0% , rgba(0,0,0,0) 7%),
+    linear-gradient( to bottom , #222 0% , rgba(0,0,0,0) 7%);
+  width: 100%;
+  height: 80vh;
+  box-sizing: border-box;
+  padding: 1.2rem;
+  gap: 5%;
+  display: flex; /* Added flex to enable centering content */
+  justify-content: space-evenly; /* Centers content horizontally */
+  align-items: center; /* Centers content vertically */
+  flex-direction: column;
+}
+.provisions{
+  margin-top: 2%;
+  font-size: calc(0.5*(2.2vw + 2.2vh));
+  font-weight: bold;
+  font-size: "Orbitron";
+  color: whitesmoke;
+}
+.provisions-2{
+  font-size: calc(0.5*(2.5vw + 2.5vh));
+  font-weight: bold;
+  font-size: "Orbitron";
+  color: whitesmoke;
+}
+
+.provisions-row-explicative{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.provisions-courses{
+  color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+  width: 22%;
+  align-items: center;
+  border: none;
+  padding: 1rem;
+  transition: border;
+}
+.provisions-courses:hover{
+  border: solid 1px whitesmoke;
+  border-radius: 10px;
+}
+
+.provisions-description{
+  font-weight: bold;
+  font-size: calc(0.5*(1.8vw + 1.8vh));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+
+
+/* =================== popular courses for user based on server interaction =============================*/
+.user-popular-courses{
+  box-sizing: border-box;
+  padding: 2%;
+  display: flex;
+  flex-direction: row;
+  background-color: #111;
+  width: 100%;
+  height: 250px;
+  justify-content: flex-start;
+  gap: 5%;
+}
+.user-course{
+  background-color: #B22222;
+  width: 100%;
+  height: 100%;
+  padding: none;
+  margin: none;
+  color: whitesmoke;
+}
+.explore-container{
+  width: 100%;
+  height: 70vh;
+  background-image:
+    linear-gradient( to top , #222 0% , #3C1361 10% , transparent 20%),
+    linear-gradient( to bottom , #222 0%, #3C1361 10% , transparent 20%),
+    url('./images/black-hole.jpg');
+  box-sizing: border-box;
+  padding: 5%;
+  background-position: center;
+  background-size: contain;
+  display: flex;
+  flex-direction: column;
+  color: whitesmoke;
+  justify-content: center;
+  font-size: calc(0.5*(4vw + 4vh));
+  font-weight: bold;
+  font-family: "Orbitron";
+}
+
+.join-today{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  padding: 3%;
+  gap: 2rem;
+}
+.join-today-right{
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  row-gap: 10px;
+  font-size: calc(0.5*(2.4vw + 2.4vh));
+}
+.join-today-left{
+  height: auto;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  row-gap: 10px;
+  color: whitesmoke;
+  font-size: calc(0.5*(2.4vw + 2.4vh));
+}
+
+
+.take-a-dive-in-physics{
+  display: flex;
+  width: 100%;
+  height: 90vh;
+  background-image: 
+    linear-gradient( to left , #222 0% , #3c1361aa 8%, rgba(0,0,0,0) 10%),
+    linear-gradient( to right, #222 0% , #3c1361aa 8%, rgba(0,0,0,0) 10%),
+    url('./images/black-hole-colored.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  flex-direction: row;
+  justify-content: flex-start;
+  color: whitesmoke;
+  display: flex;
+  align-items: center;
+  text-align: justify;
+  box-sizing: border-box;
+  padding: 10%;
+  font-size: calc(0.5*(4vw + 4vh));
+  font-weight: bold;
+  font-family: 'Orbitron';
+}
+
+/*more for the about page*/
+.about-container{
+  display: flex; flex-direction: column;
+  position: absolute;
+  top: 5rem;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: calc(100% - 5rem);
+  max-height: auto;
+  background-color: #222;
+  box-sizing: border-box;
+  padding: 2%;
+  row-gap: 1.6rem;
+}
+.about-content{
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  text-align: justify; background-color: #1c1c1c;
+  box-shadow: 5px 6px 6px #666;
+  box-sizing: border-box;
+  padding: 1.5%; font-size: calc(0.5*(1.8vw + 1.8vh));
+  font-family: 'Orbitron'; color: whitesmoke;
+}
+
+
+
+/*for the login form ------------------------------------------------------------------------------------------------*/
+.login-container, .register-container {
+  background-color: #111;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 10px 10px 30px #111;
+  width: 19.5vw;
+  color: whitesmoke;
+}
+.login-container{ height: 65vh; }
+.register-container{ height: 550px; }
+h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.form-group {
+  margin-bottom: 1rem;
+}
+.label-login {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.input-email[type="text"], .input-username[type="text"], .input-password[type="password"]{
+  width: 90%;
+  padding: 0.8rem;
+  font-size: 1rem;
+  border: 1px solid whitesmoke;
+  background-color: #111;
+  border-radius: 4px;
+  color: whitesmoke;
+}
+.button-login, .button-register {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1rem;
+  background-color: #B22222;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.button-login:hover,.button-register:hover {
+  background-color: #9e1c1c;
+}
+.error {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+.register-link {
+  text-align: center;
+  margin-top: 1rem;
+}
+.login-page , .register-page{
+  position: absolute;
+  top: 0px; left: 0px;
+  background-color: #222;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+
+.login-left-side {
+  background-image: url('./images/enter.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: whitesmoke;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60vw;
+  height: 100vh;
+}
+.login-left-side::before {
+  content: "Welcome back on PhysicsIO. We were hoping to see you again.Login to explore the beauties of physics";
+  display: flex;
+  justify-content: center;  align-items: center;
+  box-sizing: border-box; padding: 2.2rem;
+  color: white;
+  font-family: 'Orbitron';
+  font-weight: bold;
+  font-size: calc(0.5*( 4vw + 4vh ));
+  position: absolute;
+  width: 60vw;
+  height: 100vh;
+  z-index: 1;
+}
+.login-left-side > * {
+  position: relative;
+  z-index: 2;
+}
+
+.login-right-side, .register-right-side{
+  width: 40vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.register-left-side {
+  background-image: url('./images/add.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: whitesmoke;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60vw;
+  height: 100vh;
+}
+
+.register-left-side::before {
+  content: "Hello there!!! Ready to join us? Create an account today and lets hunt the nature";
+  display: flex;
+  justify-content: center;  align-items: center;
+  box-sizing: border-box; padding: 2.2rem;
+  color: white;
+  font-family: 'Orbitron';
+  font-weight: bold;
+  font-size: calc(0.5*( 4vw + 4vh ));
+  position: absolute;
+  width: 60vw;
+  height: 100vh;
+  z-index: 1;
+}
+
+.register-left-side > * {
+  position: relative;
+  z-index: 2;
+}
+
+
+/*user dash page ================================================================================================*/
+/*.user-container{
+  position: absolute;
+  top: 0px; left: 0px;
+  background-image: url('./images/black-hole-user-dashboard.jpg');
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  color: white;
+  font-family: "Orbitron";
+  font-size: 30px;
+}*/
+
+.generic-action-button-in-problems-section{
+  color: whitesmoke;
+  text-align: justify;
+  justify-content: center;
+  align-items: center;
+  padding: 0; margin: 0;
+  border: none;
+  font-family: 'Orbitron';
+  font-weight: bold;
+  font-size: calc(0.5*(1.8vw + 1.8vh));
+  display: block;
+}
+@media (max-width: 1118px) {
+  .generic-action-button-in-problems-section {
+    display: none;
+  }
+}
+.user-logged-in-dash{
+  width: 100vw;
+  position: absolute;
+  top: 12vh; left: 0vw;
+  min-height: calc(100% - 12vh);
+  height: auto;
+  background-color: #222;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2vh;
+  color: whitesmoke;
+  font-size: calc(0.5*(4vw + 4vh));
+}
+.user-not-logged-in-dash{
+  width: 100vw;
+  position: absolute;
+  background-image: url('./images/silhouette-person-icon.png');
+  background-position: center;    background-size: contain;
+  background-repeat: no-repeat;
+  color: whitesmoke;
+  font-family: 'Orbitron';
+  top: 11vh; left: 0vw;
+  min-height: calc(100% - 11vh);
+  height: auto;
+  background-color: #222;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 3vw;
+  box-sizing: border-box;
+  padding: 1em;
+}
+
+.logout-button-user-dash{
+  position: fixed;
+  bottom: 2vh;
+  right: 1vw;
+  border-color: #111; border-radius: 10px;
+  background-color: #888;
+  font-size: calc(0.5*(2vw + 2vh));
+  width: 10vw;
+  height: 6.5vh;
+  font-family: 'Orbitron';
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  transition: color 0.4s ease-in-out;
+}
+.logout-button-user-dash:hover{
+  background-color: #B22222;
+  color: whitesmoke;
+}
+
+
+.wrapper-statistics{
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.arrow-left{
+  position: absolute;
+  left: 0.2srem;   opacity: 0;   top: 50%;    transform: translateY(-50%);   cursor: "pointer";
+  font-size: 3.5rem;   color: #b22222;  padding: 0 0.5rem;
+  user-select: none;
+  transition: opacity 0.2s ease-in;
+  cursor: pointer;
+}
+.arrow-right{
+  cursor: pointer;
+  position: absolute;
+  right: 0.2rem;   opacity: 0;   top: 50%;    transform: translateY(-50%);   cursor: "pointer";
+  font-size: 3.5rem;   color: #b22222;  padding: 0 0.5rem;
+  user-select: none; z-index: 10;
+  transition: opacity 0.2s ease-in;
+}
+.wrapper-statistics:hover .arrow-left,
+.wrapper-statistics:hover .arrow-right{
+  opacity: 0.9;
+  z-index: 10;
+}
+
+
+.user-personal-stats{
+  background-color: inherit;
+  width: 100vw; font-family: 'Orbitron';
+  height: 50vh;
+  gap: 2vw;
+  box-sizing: border-box;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  font-size: calc(0.5*( 2.3vw + 2.3vh ));
+  display: flex;  flex-direction: row; justify-content: flex-start; align-items: center;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+.user-personal-stats::-webkit-scrollbar {
+  display: none;
+}
+.user-stats-cell{
+  flex: 0 0 auto;
+  width: 50vw; height: 100%;
+  display: flex; justify-content: center; align-items: center;
+  background-color: #1c1c1c; border-radius: 10px;
+  box-sizing: border-box;
+  padding: 0.2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex-direction: row;
+  gap: 2vh;
+}
+
+
+
+.simulations-dashboard-holder{
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  box-sizing: border-box;
+  top: 0vh;
+  left: 0vw;
+  display: flex;
+}
+.simulations-dashboard-tableau{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  gap: 4vw;
+  padding: calc((1/2)*(3vw + 3vh));
+  width: 100vw;
+  top: 5rem;
+  left: 0vw;
+  height: calc( 100vh - 5rem );
+  color: white;
+  box-sizing: border-box;
+}

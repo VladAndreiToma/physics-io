@@ -1,0 +1,14 @@
+version: '3.3'
+
+services:
+  mongo:
+    image: mongo:7
+    container_name: mongo
+    restart: unless-stopped
+    ports:
+      - '27017:27017'
+    volumes:
+      - physics_io_data:/data/db
+
+volumes:
+  physics_io_data:
